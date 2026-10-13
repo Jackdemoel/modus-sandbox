@@ -23,6 +23,7 @@ import ProjectCloneWizard from './components/Projects/ProjectCloneWizard';
 import { getProjects, getProjectSnapshot, downloadFileBlob, uploadFileBlob } from './api/projectsApi';
 import { getAllAccountGroups } from './api/groupsApi';
 import Settings from './components/Settings/Settings';
+import AssistPanel from './components/Assist/AssistPanel';
 
 // Refactor imports:
 import { executeProjectClone } from './services/cloneService';
@@ -280,6 +281,14 @@ function App() {
           />
         );
 
+      case 'assist':
+        return (
+          <AssistPanel
+            provideToken={getValidToken}
+            isDarkMode={isDarkMode}
+          />
+        );
+
       default:
         return <div className="text-center p-5 text-muted">Pagina niet gevonden</div>;
     }
@@ -330,6 +339,9 @@ function App() {
                   <button className={`nav-link text-dark ${activePage === 'groups' ? 'active fw-bold' : ''}`} onClick={() => { setActivePage('groups'); setSelectedProject(null); setCloningProject(null); }}>Groepen</button>
                 </li>
                 <li className="nav-item">
+                  <button className={`nav-link text-dark ${activePage === 'assist' ? 'active fw-bold' : ''}`} onClick={() => { setActivePage('assist'); setSelectedProject(null); setCloningProject(null); }}>Assistent</button>
+                </li>
+                <li className="nav-item">
                   <button className={`nav-link text-dark ${activePage === 'settings' ? 'active fw-bold' : ''}`} onClick={() => { setActivePage('settings'); setSelectedProject(null); setCloningProject(null); }}>Instellingen</button>
                 </li>
               </ul>
@@ -352,7 +364,7 @@ function App() {
 
           {/* DE WRAPPER DIVS ZIJN TERUG: Dit zorgt voor flexbox fill en scrollbalken */}
           <div className="modus-content-columns" style={{ flexGrow: 1, overflow: 'hidden' }}>
-            <div className="modus-content" style={{ overflowY: 'auto', height: '100%', padding: '20px' }}>
+            <div className="modus-content" style={{ overflowY: activePage === 'assist' ? 'hidden' : 'auto', height: '100%', padding: activePage === 'assist' ? 0 : '20px' }}>
               
               {renderActivePage()}
               

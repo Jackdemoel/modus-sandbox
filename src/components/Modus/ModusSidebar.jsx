@@ -8,6 +8,7 @@ const ModusSidebar = ({ isOpen, activePage, onPageChange }) => {
     { id: 'projects', label: 'Projecten', icon: 'folder-simple' },
     { id: 'users', label: 'Gebruikers', icon: 'users' },
     { id: 'groups', label: 'Groepen', icon: 'users-four' },
+    { id: 'assist', label: 'Assistent', icon: 'chat' },
     { id: 'settings', label: 'Instellingen', icon: 'gear' }
   ];
 
