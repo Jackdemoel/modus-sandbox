@@ -3,6 +3,12 @@ import ModusIcon from '../Modus/ModusIcon';
 import ConfirmModal from '../Modus/ConfirmModal';
 import { Logger } from '../../utils/logger';
 
+const appCommit = import.meta.env.VITE_APP_COMMIT || 'dev'
+const appBuildTime = import.meta.env.VITE_APP_BUILD_TIME
+const appBuildLabel = appBuildTime
+  ? new Date(appBuildTime).toLocaleString('nl-NL', { dateStyle: 'medium', timeStyle: 'short' })
+  : ''
+
 const Settings = ({ isDarkMode, setIsDarkMode, showToast }) => {
   // Slimme state: Haal uit geheugen OF gebruik standaardwaarde
   const [sendInvite, setSendInvite] = useState(() => JSON.parse(localStorage.getItem('trimble_send_invite') ?? 'true'));
@@ -204,6 +210,14 @@ const Settings = ({ isDarkMode, setIsDarkMode, showToast }) => {
                   <li className="d-flex justify-content-between align-items-center mb-2">
                     <span className="text-muted">Versie</span>
                     <span className="fw-semibold">1.0.0</span>
+                  </li>
+                  <li className="d-flex justify-content-between align-items-center mb-2">
+                    <span className="text-muted">Build</span>
+                    <span className="fw-semibold font-monospace" title={appBuildLabel}>{appCommit}</span>
+                  </li>
+                  <li className="d-flex justify-content-between align-items-center mb-2">
+                    <span className="text-muted">Agent</span>
+                    <span className="fw-semibold">tab Assistent</span>
                   </li>
                   <li className="d-flex justify-content-between align-items-center mb-2">
                     <span className="text-muted">Documentatie</span>
